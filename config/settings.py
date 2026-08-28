@@ -1,7 +1,5 @@
 CSRF_TRUSTED_ORIGINS = [
-    "http://127.0.0.1:8000",
-    "http://localhost:8000",
-]
+"https://potify-investment-app-ranu.onrender.com",]
 
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = FalseLOGIN_URL = "/login/"
@@ -12,8 +10,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "change-this-in-production"
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+
+ALLOWED_HOSTS = ["potify-investment-app-ranu.onrender.com"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
