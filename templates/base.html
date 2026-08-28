@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potify</title>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="app-shell">
+    <header class="topbar">
+        <a class="brand" href="/">Potify</a>
+        <div class="top-actions">
+            <span class="welcome">Hi, {{ request.user.first_name|default:request.user.username }}</span>
+            <a href="/profile/" class="avatar">👤</a>
+        </div>
+    </header>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="/" class="{% if request.path == '/' %}active{% endif %}"><span>⌂</span>Dashboard</a>
+        <a href="/pots/" class="{% if '/pots' in request.path %}active{% endif %}"><span>▣</span>My Pots</a>
+        <a href="/events/" class="{% if '/events' in request.path %}active{% endif %}"><span>↗</span>Invest</a>
+        <a href="/events/" class="{% if '/events' in request.path %}active{% endif %}"><span>◫</span>Events</a>
+        <a href="/profile/" class="{% if '/profile' in request.path %}active{% endif %}"><span>♙</span>Profile</a>
+    </nav>
+</div>
+</body>
+</html>

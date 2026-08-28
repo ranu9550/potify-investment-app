@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-title"><a href="/">←</a><h1>Profile / KYC</h1></div>
+
+<form method="post" class="profile-form card">
+{% csrf_token %}
+    <div class="profile-head">
+        <div class="big-avatar">👤</div>
+        <div><h2>{{ request.user.get_full_name|default:request.user.username }}</h2><p>{{ profile.phone }}</p><p>{{ request.user.email }}</p></div>
+    </div>
+
+    <label>First name<input name="first_name" value="{{ request.user.first_name }}"></label>
+    <label>Last name<input name="last_name" value="{{ request.user.last_name }}"></label>
+    <label>Email<input type="email" name="email" value="{{ request.user.email }}"></label>
+    <label>Phone<input name="phone" value="{{ profile.phone }}"></label>
+    <label>Address<textarea name="address">{{ profile.address }}</textarea></label>
+
+    <div class="kyc-row"><div><b>KYC Verification</b><small>Your current verification status</small></div><span class="pill {{ profile.kyc_status }}">{{ profile.get_kyc_status_display }}</span></div>
+
+    <button class="primary-btn" type="submit">Save Changes</button>
+</form>
+{% endblock %}

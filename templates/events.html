@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-title"><a href="/">←</a><h1>Upcoming Events</h1></div>
+<div class="event-list full">
+{% for event in events %}
+<div class="event-card card">
+    <div class="event-icon">◫</div>
+    <div class="event-info"><strong>{{ event.title }}</strong><small>{{ event.event_date|date:"D, d M Y · h:i A" }}</small><p>{{ event.description }}</p></div>
+    <a class="btn" href="{{ event.join_url|default:'#' }}">Join</a>
+</div>
+{% empty %}<div class="empty">No active events.</div>{% endfor %}
+</div>
+{% endblock %}

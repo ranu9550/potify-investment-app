@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+    <div>
+        <p>Welcome back 👋</p>
+        <h1>{{ request.user.first_name|default:request.user.username }}</h1>
+        <span>Grow your money, secure your future.</span>
+    </div>
+    <div class="hero-art">🌱</div>
+</section>
+
+<div class="section-head">
+    <h2>Upcoming Events</h2><a href="/events/">View All</a>
+</div>
+<div class="event-list">
+{% for event in events %}
+    <div class="event-card">
+        <div class="event-icon">◫</div>
+        <div class="event-info">
+            <strong>{{ event.title }}</strong>
+            <small>{{ event.event_date|date:"D, d M Y · h:i A" }}</small>
+        </div>
+        <a class="btn" href="{{ event.join_url|default:'#' }}">Join</a>
+    </div>
+{% empty %}
+    <div class="empty">No upcoming events.</div>
+{% endfor %}
+</div>
+
+<div class="section-head"><h2>Summary</h2></div>
+<div class="summary-grid">
+    <div class="metric"><div class="metric-icon">▣</div><span>Total Invested</span><strong>₹{{ total_invested|floatformat:0 }}</strong></div>
+    <div class="metric"><div class="metric-icon green">↗</div><span>Total Gained</span><strong>₹{{ total_gained|floatformat:0 }}</strong></div>
+    <div class="metric"><div class="metric-icon orange">◷</div><span>Upcoming Gain</span><strong>₹{{ upcoming_gain|floatformat:0 }}</strong></div>
+</div>
+
+<div class="section-head"><h2>My Pots <small>(This Month)</small></h2><a href="/pots/">View All</a></div>
+<div class="status-grid">
+    <div class="status blue"><span>⌛</span><b>In Process</b><strong>{{ pots_in_process }}</strong></div>
+    <div class="status green"><span>✓</span><b>Completed</b><strong>{{ pots_completed }}</strong></div>
+    <div class="status red"><span>×</span><b>Canceled</b><strong>{{ pots_canceled }}</strong></div>
+</div>
+
+<div class="section-head"><h2>Recent Activity</h2></div>
+<div class="activity-list">
+{% for item in activities %}
+    <div class="activity"><div><strong>{{ item.title }}</strong><small>{{ item.created_at|date:"d M Y" }}</small></div><b>₹{{ item.amount|floatformat:0 }}</b></div>
+{% empty %}
+    <div class="empty">No recent activity.</div>
+{% endfor %}
+</div>
+{% endblock %}

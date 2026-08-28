@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-title"><a href="/">←</a><h1>My Pots</h1></div>
+
+<div class="tabs">
+    <a href="/pots/?status=in_process" class="{% if selected == 'in_process' %}selected{% endif %}">In Process</a>
+    <a href="/pots/?status=completed" class="{% if selected == 'completed' %}selected{% endif %}">Completed</a>
+    <a href="/pots/?status=canceled" class="{% if selected == 'canceled' %}selected{% endif %}">Canceled</a>
+</div>
+
+<div class="overview card">
+    <h3>This Month Overview</h3>
+    <div class="overview-grid">
+        <div><strong>{{ pots|length }}</strong><span>Visible Pots</span></div>
+        <div><strong>₹{{ pots|length|default:0 }}</strong><span>Records</span></div>
+        <div><strong>●</strong><span>Status</span></div>
+    </div>
+</div>
+
+<div class="pot-list">
+{% for pot in pots %}
+    <div class="pot-card card">
+        <div class="pot-title"><span class="pot-symbol">↗</span><div><strong>{{ pot.name }}</strong><small>Invested ₹{{ pot.invested|floatformat:0 }}</small></div><span class="pill {{ pot.status }}">{{ pot.get_status_display }}</span></div>
+        <div class="pot-bottom"><span>Expected Gain</span><strong>₹{{ pot.expected_gain|floatformat:0 }}</strong></div>
+    </div>
+{% empty %}
+    <div class="empty">No pots found.</div>
+{% endfor %}
+</div>
+{% endblock %}
