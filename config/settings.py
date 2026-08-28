@@ -12,8 +12,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "change-this-in-production"
 DEBUG = False
 
-ALLOWED_HOSTS = ["potify-investment-app-ranu.onrender.com"]
-
+ALLOWED_HOSTS = [
+    "potify-investment-app-ranu.onrender.com",
+    "127.0.0.1",
+    "localhost",
+]
+ALLOWED_HOSTS = [
+    "potify-investment-app-ranu.onrender.com",
+    "127.0.0.1",
+    "localhost",
+]
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -66,7 +74,7 @@ LANGUAGE_CODE = "en-us"
 TIME_ZONE = "Asia/Kolkata"
 USE_I18N = True
 USE_TZ = True
-
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
